@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poscodx.guestbook.repository.GuestbookRepositoryWithJdbcContext;
+import com.poscodx.guestbook.repository.GuestbookRepositoryWithJdbcTemplate;
 import com.poscodx.guestbook.repository.GuestbookRepositoryWithRawJdbc;
 import com.poscodx.guestbook.vo.GuestbookVo;
 
@@ -25,12 +26,12 @@ public class GuestbookController {
 	@Autowired(required=true)
 	private GuestbookRepositoryWithJdbcContext guestbookRepository2;
 	
-//	@Autowired(required=true)
-//	private GuestbookRepositoryWithJdbcTemplate guestbookRepository3;
+	@Autowired(required=true)
+	private GuestbookRepositoryWithJdbcTemplate guestbookRepository3;
 	
 	@RequestMapping("/")
 	public String index(Model model) {
-		List<GuestbookVo> list = guestbookRepository1.findAll();
+		List<GuestbookVo> list = guestbookRepository3.findAll();
 		model.addAttribute("list", list);
 		return "index";
 	}
@@ -42,7 +43,7 @@ public class GuestbookController {
 		String regDate = dateFormat.format(now);
 		vo.setRegDate(regDate);
 		
-		guestbookRepository2.insert(vo);
+		guestbookRepository3.insert(vo);
 		return "redirect:/";
 	}
 
@@ -54,7 +55,7 @@ public class GuestbookController {
 	
 	@RequestMapping(value="/delete/{no}", method=RequestMethod.POST)
 	public String delete(@PathVariable("no") Long no, @RequestParam(value="password", required=true, defaultValue="") String password) {
-		guestbookRepository2.deleteByNoAndPassword(no, password);
+		guestbookRepository3.deleteByNoAndPassword(no, password);
 		return "redirect:/";
 	}
 }
