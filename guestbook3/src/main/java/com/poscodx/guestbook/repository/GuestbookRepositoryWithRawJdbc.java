@@ -1,38 +1,33 @@
 package com.poscodx.guestbook.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.poscodx.guestbook.vo.GuestbookVo;
 
 @Repository
-public class GuestbookRepository {
-	private Connection getConnection() throws SQLException {
-		Connection conn = null;
-		
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.0.196:3306/webdb?charset=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
-		}
-		
-		return conn;
+public class GuestbookRepositoryWithRawJdbc {
+	//@Autowired
+	private DataSource dataSource;
+	
+	public GuestbookRepositoryWithRawJdbc(DataSource dataSource) { // @Autowired 대신
+		this.dataSource = dataSource;
 	}
 	
 	public List<GuestbookVo> findAll() {
 		List<GuestbookVo> result = new ArrayList<>();
 		
 		try (
-			Connection conn = getConnection();
+			Connection conn = dataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement("select no, name, contents, date_format(reg_date, '%Y/%m/%d %h:%i:%s')"
 															+ " from guestbook"
 															+ " order by reg_date desc");
@@ -66,7 +61,7 @@ public class GuestbookRepository {
 		int result = 0;
 
 		try (
-			Connection conn = getConnection();
+			Connection conn = dataSource.getConnection();
 			PreparedStatement pstmt1 = conn.prepareStatement("insert into guestbook(name, password, contents, reg_date) values(?, ?, ?, ?)");
 			PreparedStatement pstmt2 = conn.prepareStatement("select last_insert_id() from dual");
 		) {
@@ -90,7 +85,7 @@ public class GuestbookRepository {
 		int result = 0;
 
 		try (
-			Connection conn = getConnection();
+			Connection conn = dataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement("delete from guestbook where no = ? and password = ?");
 		) {
 			pstmt.setLong(1, no);
