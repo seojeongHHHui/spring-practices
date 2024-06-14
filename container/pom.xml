@@ -8,7 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>container</artifactId>
-
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
@@ -25,6 +25,12 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+	<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>		
+
 		<!-- spring test -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -32,19 +38,18 @@
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
-		
-		<!-- junit5(Jupiter) -->
+
+		<!-- junit5(jupiter) -->
 		<dependency>
 		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter-api</artifactId>
 		    <version>5.10.2</version>
 		    <scope>test</scope>
 		</dependency>
-		
+	
 	</dependencies>
 	
 	<build>
 		<finalName>container</finalName>
-	</build>
-	
+	</build>	
 </project>

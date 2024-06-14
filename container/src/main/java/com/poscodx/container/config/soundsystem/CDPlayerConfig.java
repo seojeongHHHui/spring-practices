@@ -4,8 +4,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages= {"com.poscodx.container.soundsystem"})
+@ComponentScan(basePackages={"com.poscodx.container.soundsystem"})
 public class CDPlayerConfig {
-	
-	
 }
