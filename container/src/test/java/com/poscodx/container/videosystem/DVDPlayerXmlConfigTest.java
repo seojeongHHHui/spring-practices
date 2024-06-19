@@ -1,5 +1,6 @@
 package com.poscodx.container.videosystem;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Disabled;
@@ -35,6 +36,51 @@ public class DVDPlayerXmlConfigTest {
 	@Qualifier("avengersAgeOfUltron")
 	DigitalVideoDisc dvd5;
 
+	@Autowired
+	@Qualifier("avengersCaptainAmerica")
+	DigitalVideoDisc dvd6;
+
+	@Autowired
+	@Qualifier("avengersDirectorEdition")
+	DigitalVideoDisc dvd7;
+
+	@Autowired
+	DVDPack dvdPack;
+
+	@Autowired
+	@Qualifier("avengersExpansionEdition1")
+	DigitalVideoDisc dvd8;
+
+	@Autowired
+	@Qualifier("avengersExpansionEdition2")
+	DigitalVideoDisc dvd9;
+
+	@Autowired
+	@Qualifier("avengersExpansionEdition3")
+	DigitalVideoDisc dvd10;
+
+	@Autowired
+	@Qualifier("dvdPlayer1")
+	DVDPlayer dvdPlayer1;
+
+	@Autowired
+	@Qualifier("dvdPlayer2")
+	DVDPlayer dvdPlayer2;
+
+	@Autowired
+	@Qualifier("dvdPlayer3")
+	DVDPlayer dvdPlayer3;
+
+	@Autowired
+	@Qualifier("dvdPlayer4")
+	DVDPlayer dvdPlayer4;
+
+	@Autowired
+	@Qualifier("dvdPlayer5")
+	DVDPlayer dvdPlayer5;
+
+	//////////////////////////////////////////////
+	
 	@Disabled
 	@Test
 	public void testDVD1() {
@@ -59,6 +105,61 @@ public class DVDPlayerXmlConfigTest {
 	@Test
 	public void testDVD5() {
 		assertNotNull(dvd5);
+	}
+
+	@Test
+	public void testDVD6() {
+		assertNotNull(dvd6);
+	}
+
+	@Test
+	public void testDVD7() {
+		assertNotNull(dvd7);
+	}
+	
+	@Test
+	public void testDVDPack() {
+		assertNotNull(dvdPack);
+	}	
+
+	@Test
+	public void testDVD8() {
+		assertNotNull(dvd8);
+	}
+
+	@Test
+	public void testDVD9() {
+		assertNotNull(dvd9);
+	}
+
+	@Test
+	public void testDVD10() {
+		assertNotNull(dvd10);
+	}
+
+	@Test
+	public void testPlay1() {
+		assertEquals("Playing Movie Marvel's Iron Man", dvdPlayer1.play());
+	}
+	
+	@Test
+	public void testPlay2() {
+		assertEquals("Playing Movie Marvel's Iron Man", dvdPlayer2.play());
+	}
+
+	@Test
+	public void testPlay3() {
+		assertEquals("Playing Movie Marvel's Iron Man", dvdPlayer3.play());
+	}
+
+	@Test
+	public void testPlay4() {
+		assertEquals("Playing Movie Marvel's Iron Man", dvdPlayer4.play());
+	}
+
+	@Test
+	public void testPlay5() {
+		assertEquals("Playing Movie Marvel's Iron Man", dvdPlayer5.play());
 	}
 	
 }
